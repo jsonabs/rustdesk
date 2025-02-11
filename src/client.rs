@@ -2296,7 +2296,7 @@ impl LoginConfigHandler {
         } else {
             (my_id, self.id.clone())
         };
-        let mut display_name = "555".into();//get_builtin_option(config::keys::OPTION_DISPLAY_NAME);
+        let mut display_name = get_builtin_option(config::keys::OPTION_DISPLAY_NAME);
         if display_name.is_empty() {
             display_name =
                 serde_json::from_str::<serde_json::Value>(&LocalConfig::get_option("user_info"))
@@ -2315,6 +2315,7 @@ impl LoginConfigHandler {
         let my_platform = whoami::platform().to_string();
         #[cfg(target_os = "android")]
         let my_platform = "Android".into();
+        let my_name = "555".into();
         let hwid = if self.get_option("trust-this-device") == "Y" {
             crate::get_hwid()
         } else {
@@ -2324,7 +2325,7 @@ impl LoginConfigHandler {
             username: pure_id,
             password: password.into(),
             my_id,
-            my_name: display_name,
+            my_name: my_name,
             my_platform,
             option: self.get_option_message(true).into(),
             session_id: self.session_id,
