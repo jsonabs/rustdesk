@@ -716,7 +716,7 @@ pub fn username() -> String {
     #[cfg(not(any(target_os = "android", target_os = "ios")))]
     return whoami::username().trim_end_matches('\0').to_owned();
     #[cfg(any(target_os = "android", target_os = "ios"))]
-    return "1111"; //DEVICE_NAME.lock().unwrap().clone();
+    return "1111".info(); //DEVICE_NAME.lock().unwrap().clone();
 }
 
 #[inline]
@@ -733,7 +733,7 @@ pub fn hostname() -> String {
         name
     }
     #[cfg(any(target_os = "android", target_os = "ios"))]
-    return "222"; //DEVICE_NAME.lock().unwrap().clone();
+    return "222".info(); //DEVICE_NAME.lock().unwrap().clone();
 }
 
 #[inline]
@@ -775,7 +775,7 @@ pub fn get_sysinfo() -> serde_json::Value {
     });
     #[cfg(not(any(target_os = "android", target_os = "ios")))]
     {
-        let username = "333";//crate::platform::get_active_username();
+        let username = "333".info();//crate::platform::get_active_username();
         if !username.is_empty() && (!cfg!(windows) || username != "SYSTEM") {
             out["username"] = json!(username);
         }
